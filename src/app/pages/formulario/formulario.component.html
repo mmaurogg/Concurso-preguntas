@@ -1,13 +1,18 @@
-<h4>Concurso <small> ¡¡El Cuestionario Ganador!! </small></h4>
+<h1>Concurso <small> ¡¡El Cuestionario Ganador!! </small></h1>
+
+<div class="row">
+    <h3>Score <small>{{score}}</small> </h3>
+</div>
 
 <hr />
+
 <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
 
-    <div>
+    <div *ngIf="!identidadValidada">
 
         <div class="form-group row">
             <label class="col-2 col-form-label">Nombre</label>
-            <div class="col">
+            <div class="col-6">
                 <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre" [class.is-invalid]="nombreNoValido" />
                 <small *ngIf="nombreNoValido" class="text-danger">
           Ingrese al menos 5 letras
@@ -17,7 +22,7 @@
 
         <div class="form-group row">
             <label class="col-2 col-form-label">Cedula</label>
-            <div class="col">
+            <div class="col-6">
                 <input class="form-control" type="text" placeholder="Documento" formControlName="documento" [class.is-invalid]="documentoNoValido" />
                 <small *ngIf="documentoNoValido" class="text-danger">
           El documento es obligatorio
@@ -27,7 +32,7 @@
 
         <div class="form-group row">
             <label class="col-2 col-form-label" required>Correo</label>
-            <div class="col">
+            <div class="col-6">
                 <input class="form-control" type="email" placeholder="Correo" formControlName="email" [class.is-invalid]="emailNoValido" />
                 <small *ngIf="emailNoValido" class="text-danger">
             Ingrese un correo válido
@@ -35,169 +40,223 @@
             </div>
         </div>
 
+        <div class="form-group row">
+            <div class="input-group col-md-8">
+                <button type="button" class="btn btn-outline-primary btn-block" (click)="validarIdentidad()">
+            Enviar
+          </button>
+            </div>
+        </div>
+
     </div>
 
-    <br>
-    <br>
+    <div *ngIf="!identidadValidada">
 
 
-    <div>
         <div class="form-group row">
-            <label class="col-2 col-form-label">Pregunta1</label>
+            <div class="input-group col-md-8">
+                <button type="submit" class="btn btn-outline-primary btn-block">
+            Reclamar mi premio
+          </button>
+            </div>
+            <br>
+        </div>
+
+        <div class="form-group row" *ngIf="3<score">
+            <label class="col-form-label">{{preguntas[4].pregunta}}</label>
             <div class="col-8">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" formControlName="pregunta1" value="A1" [class.is-invalid]="" />
-                    <label class="form-check-label">A1</label>
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta5" [value]="this.preguntas[4].respuestas[0]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[4].respuestas[0].message }}</label>
                 </div>
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" formControlName="pregunta1" value="B1" [class.is-invalid]="" />
-                    <label class="form-check-label">B1</label>
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta5" [value]="this.preguntas[4].respuestas[1]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[4].respuestas[1].message }}</label>
                 </div>
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" formControlName="pregunta1" value="C1" [class.is-invalid]="" />
-                    <label class="form-check-label">C1</label>
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta5" [value]="this.preguntas[4].respuestas[2]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[4].respuestas[2].message }}</label>
                 </div>
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" formControlName="pregunta1" value="D1" [class.is-invalid]="" />
-                    <label class="form-check-label">D1</label>
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta5" [value]="this.preguntas[4].respuestas[3]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[4].respuestas[3].message }}</label>
+                </div>
+                <small *ngIf="respuesta5NoValido" class="text-danger">
+                        Ingrese una respuesta
+                    </small>
+
+                <div class="form-group row">
+
+                    <div class="input-group col-md-8">
+                        <button type="button" class="btn btn-outline-primary btn-block" (click)="validar( forma.value.respuesta5 )">
+                        Validar
+                      </button>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row" *ngIf="2<score && score<4">
+            <label class="col-form-label">{{preguntas[3].pregunta}}</label>
+            <div class="col-8">
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta4" [value]="this.preguntas[3].respuestas[0]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[3].respuestas[0].message }}</label>
+                </div>
+
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta4" [value]="this.preguntas[3].respuestas[1]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[3].respuestas[1].message }}</label>
+                </div>
+
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta4" [value]="this.preguntas[3].respuestas[2]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[3].respuestas[2].message }}</label>
+                </div>
+
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta4" [value]="this.preguntas[3].respuestas[3]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[3].respuestas[3].message }}</label>
+                </div>
+                <small *ngIf="respuesta4NoValido" class="text-danger">
+                        Ingrese una respuesta
+                      </small>
+
+                <div class="form-group row">
+
+                    <div class="input-group col-md-8">
+                        <button type="button" class="btn btn-outline-primary btn-block" (click)="validar( forma.value.respuesta4 )">
+                        Validar
+                      </button>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row" *ngIf="1<score && score<3">
+            <label class="col-form-label">{{preguntas[2].pregunta}}</label>
+            <div class="col-8">
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta3" [value]="this.preguntas[2].respuestas[0]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[2].respuestas[0].message }}</label>
+                </div>
+
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta3" [value]="this.preguntas[2].respuestas[1]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[2].respuestas[1].message }}</label>
+                </div>
+
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta3" [value]="this.preguntas[2].respuestas[2]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{  this.preguntas[2].respuestas[2].message  }}</label>
+                </div>
+
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta3" [value]="this.preguntas[2].respuestas[3]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[2].respuestas[3].message }}</label>
+                </div>
+                <small *ngIf="respuesta3NoValido" class="text-danger">
+                        Ingrese una respuesta
+                </small>
+
+                <div class="form-group row">
+
+                    <div class="input-group col-md-8">
+                        <button type="button" class="btn btn-outline-primary btn-block" (click)="validar( forma.value.respuesta3 )">
+                    Validar
+                  </button>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row" *ngIf="0<score && score<2">
+            <label class="col-form-label">{{preguntas[1].pregunta}}</label>
+            <div class="col-8">
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta2" [value]="this.preguntas[1].respuestas[0]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[1].respuestas[0].message }}</label>
+                </div>
+
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta2" [value]="this.preguntas[1].respuestas[1]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{  this.preguntas[1].respuestas[1].message }}</label>
+                </div>
+
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta2" [value]="this.preguntas[1].respuestas[2]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{  this.preguntas[1].respuestas[2].message }}</label>
+                </div>
+
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta2" [value]="this.preguntas[1].respuestas[3]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{  this.preguntas[1].respuestas[3].message }}</label>
+                </div>
+                <small *ngIf="respuesta2NoValido" class="text-danger">
+                        Ingrese una respuesta
+                      </small>
+
+                <div class="form-group row">
+
+                    <div class="input-group col-md-8">
+                        <button type="button" class="btn btn-outline-primary btn-block" (click)="validar( forma.value.respuesta2 )">
+                        Validar
+                      </button>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col" *ngIf="score<1">
+            <label class="col-form-label">{{preguntas[0].pregunta}}</label>
+            <div class="col-10">
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta1" [value]="this.preguntas[0].respuestas[0]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[0].respuestas[0].message }}</label>
+                </div>
+
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta1" [value]="this.preguntas[0].respuestas[1]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[0].respuestas[1].message }}</label>
+                </div>
+
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta1" [value]="this.preguntas[0].respuestas[2]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[0].respuestas[2].message }}</label>
+                </div>
+
+                <div class="form-check form-check-col">
+                    <input class="form-check-input" type="radio" formControlName="respuesta1" [value]="this.preguntas[0].respuestas[3]" [class.is-invalid]="" />
+                    <label class="form-check-label">{{ this.preguntas[0].respuestas[3].message }}</label>
                 </div>
 
                 <small *ngIf="respuesta1NoValido" class="text-danger">
-                    Ingrese una respuesta
-                  </small>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-2 col-form-label">Pregunta2</label>
-                <div class="col-8">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta2" value="A2" [class.is-invalid]="" />
-                        <label class="form-check-label">A2</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta2" value="B2" [class.is-invalid]="" />
-                        <label class="form-check-label">B2</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta2" value="C2" [class.is-invalid]="" />
-                        <label class="form-check-label">C2</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta2" value="D2" [class.is-invalid]="" />
-                        <label class="form-check-label">D2</label>
-                    </div>
-                    <small *ngIf="respuesta2NoValido" class="text-danger">
                         Ingrese una respuesta
                       </small>
-                </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-2 col-form-label">Pregunta3</label>
-                <div class="col-8">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta3" value="A3" [class.is-invalid]="" />
-                        <label class="form-check-label">A3</label>
-                    </div>
+                <div class="form-group row">
 
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta3" value="B3" [class.is-invalid]="" />
-                        <label class="form-check-label">B3</label>
+                    <div class="input-group col-md-8">
+                        <button type="button" class="btn btn-outline-primary btn-block" (click)="validar( forma.value.respuesta1 )">
+                        Validar
+                      </button>
                     </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta3" value="C3" [class.is-invalid]="" />
-                        <label class="form-check-label">C3</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta3" value="D3" [class.is-invalid]="" />
-                        <label class="form-check-label">D3</label>
-                    </div>
-                    <small *ngIf="respuesta3NoValido" class="text-danger">
-                        Ingrese una respuesta
-                      </small>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-2 col-form-label">Pregunta4</label>
-                <div class="col-8">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta4" value="A4" [class.is-invalid]="" />
-                        <label class="form-check-label">A4</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta4" value="B4" [class.is-invalid]="" />
-                        <label class="form-check-label">B4</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta4" value="C4" [class.is-invalid]="" />
-                        <label class="form-check-label">C4</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta4" value="D4" [class.is-invalid]="" />
-                        <label class="form-check-label">D4</label>
-                    </div>
-                    <small *ngIf="respuesta4NoValido" class="text-danger">
-                        Ingrese una respuesta
-                      </small>
                 </div>
 
             </div>
 
-            <div class="form-group row">
-                <label class="col-2 col-form-label">Pregunta5</label>
-                <div class="col-8">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta5" value="A5" [class.is-invalid]="" />
-                        <label class="form-check-label">A5</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta5" value="B5" [class.is-invalid]="" />
-                        <label class="form-check-label">B5</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta5" value="C5" [class.is-invalid]="" />
-                        <label class="form-check-label">C5</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="pregunta5" value="D5" [class.is-invalid]="" />
-                        <label class="form-check-label">D5</label>
-                    </div>
-                    <small *ngIf="respuesta5NoValido" class="text-danger">
-                        Ingrese una respuesta
-                      </small>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-2 col-form-label">&nbsp;</label>
-        <div class="input-group col-md-8">
-            <button type="submit" class="btn btn-outline-primary btn-block">
-        Guardar
-      </button>
         </div>
     </div>
 
 </form>
-
+<!-- 
 <hr />
 <pre>Estado del formulario {{ forma.valid }} 
     <br>
@@ -206,4 +265,4 @@
 
 <pre>
     {{ forma.value | json }}
-</pre>
+</pre> -->

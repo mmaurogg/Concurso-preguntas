@@ -5,12 +5,29 @@ export class RespuestaModel {
     nombre?: String;
     documento?: String;
     email?: String;
-    pregunta1?: String;
-    pregunta2?: String;
-    pregunta3?: String;
-    pregunta4?: String;
-    pregunta5?: String;
+    respuesta1?: {
+        respuesta: String,
+        pregunta: String,
+    };
+    respuesta2?: {
+        respuesta: String,
+        pregunta: String,
+    };
+    respuesta3?: {
+        respuesta: String,
+        pregunta: String,
+    };
+    respuesta4?: {
+        respuesta: String,
+        pregunta: String,
+    };
+    respuesta5?: {
+        respuesta: String,
+        pregunta: String,
+    };
     fecha?: Date;
+
+    score?: Number;
 
     constructor() {
         this.fecha = new Date();
