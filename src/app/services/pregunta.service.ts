@@ -8,72 +8,6 @@ import { Pregunta } from '../interfaces/pregunta.model';
 })
 export class PreguntaService {
 
-  // preguntas: Pregunta [] = [
-    
-    // {
-    //   pregunta: "Pregunta 1 del cuestionario",
-    //   respuestas: [{ message: "respuesta correcta", value: 1},
-    //               { message: "respuesta incorrecta 1.1", value: 0},
-    //               { message: "respuesta incorrecta 1.2", value: 0}, 
-    //               { message: "respuesta incorrecta 1.3", value: 0}],
-    // },
-    // {
-    //   pregunta: "Pregunta 2 del cuestionario",
-    //   respuestas: [{ message: "respuesta correcta", value: 1},
-    //               { message: "respuesta incorrecta 2.1", value: 0},
-    //               { message: "respuesta incorrecta 2.2", value: 0}, 
-    //               { message: "respuesta incorrecta 2.3", value: 0}],
-    // },
-    // {
-    //   pregunta: "Pregunta 3 del cuestionario",
-    //   respuestas: [{ message: "respuesta correcta", value: 1},
-    //               { message: "respuesta incorrecta 3.1", value: 0},
-    //               { message: "respuesta incorrecta 3.2", value: 0}, 
-    //               { message: "respuesta incorrecta 3.3", value: 0}],
-    // },
-    // {
-    //   pregunta: "Pregunta 4 del cuestionario",
-    //   respuestas: [{ message: "respuesta correcta", value: 1},
-    //               { message: "respuesta incorrecta 4.1", value: 0},
-    //               { message: "respuesta incorrecta 4.2", value: 0}, 
-    //               { message: "respuesta incorrecta 4.3", value: 0}],
-    // },
-    // {
-    //   pregunta: "Pregunta 5 del cuestionario",
-    //   respuestas: [{ message: "respuesta correcta", value: 1},
-    //               { message: "respuesta incorrecta 5.1", value: 0},
-    //               { message: "respuesta incorrecta 5.2", value: 0}, 
-    //               { message: "respuesta incorrecta 5.3", value: 0}],
-    // },
-    
-    // {
-    //   pregunta: "Pregunta 1 del cuestionario",
-    //   respuestaV: { message: "respuesta correcta", value: 1},
-    //   respuestaF: ["respuesta incorrecta 1.1","respuesta incorrecta 1.2", "respuesta incorrecta 1.3"],
-    // },
-    // {
-    //   pregunta: "Pregunta 2 del cuestionario",
-    //   respuestaV: { message: "respuesta correcta", value: 1},
-    //   respuestaF: ["respuesta incorrecta 2.1", "respuesta incorrecta 2.2", "respuesta incorrecta 2.3"],
-    // },
-    // {
-    //   pregunta: "Pregunta 3 del cuestionario",
-    //   respuestaV: { message: "respuesta correcta", value: 1},
-    //   respuestaF: ["respuesta incorrecta 3.1", "respuesta incorrecta 3.2", "respuesta incorrecta 3.3"],
-    // },
-    // {
-    //   pregunta: "Pregunta 4 del cuestionario",
-    //   respuestaV: { message: "respuesta correcta", value: 1},
-    //   respuestaF: ["respuesta incorrecta 4.1", "respuesta incorrecta 4.2", "respuesta incorrecta 4.3"],
-    // },
-    // {
-    //   pregunta: "Pregunta 5 del cuestionario",
-    //   respuestaV: { message: "respuesta correcta", value: 1},
-    //   respuestaF: ["respuesta incorrecta 5.1", "respuesta incorrecta 5.2", "respuesta incorrecta 5.3"],
-    // },
-  // ];
-
-
   private url = "http://localhost:4040/api"
   
   constructor( private http: HttpClient ) { 
@@ -84,18 +18,6 @@ export class PreguntaService {
 
 
   getPreguntas() {
-
-  //   return new Promise ( ( resolve, reject ) => {
-
-  //     this.http.get(`${this.url}/listaPreguntas`)
-  //   //.subscribe( (resp: Producto []) => {
-  //   .subscribe( (resp: any ) => {    
-  //   this.preguntas = resp.preguntas;
-  //   console.log(resp.preguntas)
-  //   console.log(this.preguntas)
-    
-  // });      
-  // });
 
     return this.http.get(`${this.url}/listaPreguntas`)
     .pipe(
@@ -125,7 +47,6 @@ export class PreguntaService {
     console.log(arregloPreguntas);
 
     return arregloPreguntas;
-
 
   }
 
